@@ -7,7 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Boxicons CSS -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+    />
     <title>Side Navigation Bar in HTML CSS JavaScript</title>
+    <link rel="stylesheet" href="../assets/style/globalStyle.css" />
     <link rel="stylesheet" href="../assets/style/sideBar.css" />
 </head>
 
@@ -33,50 +41,27 @@
         <div class="menu_content">
             <ul class="menu_items first_item">
                 <div class="menu_title menu_dahsboard"></div>
-                <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
-                <!-- start -->
                 <li class="item">
-                    <div href="#" class="nav_link submenu_item">
+                    <div href="#" class="nav_link submenu_item" data-bs-toggle="tooltip" data-bs-placement="right" title="Home">
                         <span class="navlink_icon">
                             <i class="bx bx-home-alt"></i>
                         </span>
                         <span class="navlink">Home</span>
                     </div>
                 </li>
-                <!-- end -->
-                <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
-                <!-- start -->
-                <!-- <li class="item">
-                    <div href="#" class="nav_link submenu_item">
-                        <span class="navlink_icon">
-                            <i class="bx bx-grid-alt"></i>
-                        </span>
-                        <span class="navlink">Overview</span>
-                    </div>
-                    <ul class="menu_items submenu">
-                        <a href="#" class="nav_link sublink">Nav Sub Link</a>
-                        <a href="#" class="nav_link sublink">Nav Sub Link</a>
-                        <a href="#" class="nav_link sublink">Nav Sub Link</a>
-                        <a href="#" class="nav_link sublink">Nav Sub Link</a>
-                    </ul>
-                </li> -->
-                <!-- end -->
             </ul>
             <ul class="menu_items">
                 <div class="menu_title menu_application"></div>
-                <!-- duplicate these li tag if you want to add or remove navlink only -->
-                <!-- Start -->
                 <li class="item">
-                    <a href="#" class="nav_link">
+                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Applications">
                         <span class="navlink_icon">
                             <i class="bx bxs-folder-open"></i>
                         </span>
                         <span class="navlink">Applications</span>
                     </a>
                 </li>
-                <!-- End -->
                 <li class="item">
-                    <a href="#" class="nav_link">
+                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Archive">
                         <span class="navlink_icon">
                             <i class="bx bx-cabinet"></i>
                         </span>
@@ -87,7 +72,7 @@
             <ul class="menu_items">
                 <div class="menu_title menu_setting"></div>
                 <li class="item">
-                    <a href="#" class="nav_link">
+                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Profile">
                         <span class="navlink_icon">
                             <i class="bx bx-user"></i>
                         </span>
@@ -95,7 +80,7 @@
                     </a>
                 </li>
                 <li class="item">
-                    <a href="#" class="nav_link">
+                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Logs">
                         <span class="navlink_icon">
                             <i class="bx bx-file"></i>
                         </span>
@@ -103,7 +88,7 @@
                     </a>
                 </li>
                 <li class="item">
-                    <a href="#" class="nav_link">
+                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout">
                         <span class="navlink_icon">
                             <i class="bx bx-log-out"></i>
                         </span>
@@ -115,11 +100,11 @@
             </ul>
             <!-- Sidebar Open / Close -->
             <div class="bottom_content">
-                <div class="bottom expand_sidebar">
+                <div class="bottom expand_sidebar" data-bs-toggle="tooltip" data-bs-placement="right" title="Expand sidebar">
                     <span> Expand</span>
                     <i class='bx bx-chevrons-right'></i>
                 </div>
-                <div class="bottom collapse_sidebar">
+                <div class="bottom collapse_sidebar" data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse sidebar">
                     <span> Collapse</span>
                     <i class='bx bx-chevrons-left'></i>
                 </div>
@@ -127,7 +112,39 @@
         </div>
     </nav>
     <!-- JavaScript -->
+    <!-- Bootstrap JS bundle (includes Popper) -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+    ></script>
     <script src="../assets/js/sideBar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.bootstrap && bootstrap.Tooltip) {
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+
+                window.updateSidebarTooltips = function () {
+                    var sidebar = document.querySelector('.sidebar');
+                    if (!sidebar) return;
+                    var isClosed = sidebar.classList.contains('close');
+                    tooltipList.forEach(function (tooltip) {
+                        if (isClosed) {
+                            tooltip.enable();
+                        } else {
+                            tooltip.disable();
+                        }
+                    });
+                };
+
+                // Initial state
+                window.updateSidebarTooltips();
+            }
+        });
+    </script>
 
     <div id="main-content">
         CONTENT

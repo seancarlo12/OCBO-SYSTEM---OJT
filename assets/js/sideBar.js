@@ -5,21 +5,39 @@ const submenuItems = document.querySelectorAll(".submenu_item");
 const sidebarOpen = document.querySelector("#sidebarOpen");
 const sidebarClose = document.querySelector(".collapse_sidebar");
 const sidebarExpand = document.querySelector(".expand_sidebar");
-sidebarOpen.addEventListener("click", () => sidebar.classList.toggle("close"));
+const sidebarNavLinks = document.querySelectorAll(".sidebar .nav_link[data-href]");
+
+sidebarNavLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+        const target = link.getAttribute("data-href");
+        if (target) {
+            e.preventDefault();
+            window.location.href = target;
+        }
+    });
+});
+sidebarOpen.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+    if (typeof window.updateSidebarTooltips === "function") {
+        window.updateSidebarTooltips();
+    }
+});
 sidebarClose.addEventListener("click", () => {
-    sidebar.classList.add("close", "hoverable");
+    // Toggle between collapsed and expanded states without hover behavior
+    const isClosed = sidebar.classList.contains("close");
+    if (isClosed) {
+        sidebar.classList.remove("close", "hoverable");
+    } else {
+        sidebar.classList.add("close", "hoverable");
+    }
+    if (typeof window.updateSidebarTooltips === "function") {
+        window.updateSidebarTooltips();
+    }
 });
 sidebarExpand.addEventListener("click", () => {
     sidebar.classList.remove("close", "hoverable");
-});
-sidebar.addEventListener("mouseenter", () => {
-    if (sidebar.classList.contains("hoverable")) {
-        sidebar.classList.remove("close");
-    }
-});
-sidebar.addEventListener("mouseleave", () => {
-    if (sidebar.classList.contains("hoverable")) {
-        sidebar.classList.add("close");
+    if (typeof window.updateSidebarTooltips === "function") {
+        window.updateSidebarTooltips();
     }
 });
 darkLight.addEventListener("click", () => {
@@ -45,4 +63,8 @@ if (window.innerWidth < 768) {
     sidebar.classList.add("close");
 } else {
     sidebar.classList.remove("close");
+}
+
+if (typeof window.updateSidebarTooltips === "function") {
+    window.updateSidebarTooltips();
 }
