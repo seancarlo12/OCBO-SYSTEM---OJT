@@ -14,7 +14,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     />
-    <title>Side Navigation Bar in HTML CSS JavaScript</title>
+    <title>OCBO e-LogBook System</title>
     <link rel="stylesheet" href="../assets/style/globalStyle.css" />
     <link rel="stylesheet" href="../assets/style/sideBar.css" />
 </head>
@@ -24,7 +24,7 @@
     <nav class="navbar">
         <div class="logo_item">
             <i class="bx bx-menu" id="sidebarOpen"></i>
-            <img src="../assets/images/cab-logo.jpg" alt=""></i>OCBO Application and Archive System
+            <img src="../assets/images/cab-logo.jpg" alt=""></i>OCBO e-LogBook System
         </div>
             <!-- <div class="search_bar">
                 <input type="text" placeholder="Search" />
@@ -42,49 +42,33 @@
             <ul class="menu_items first_item">
                 <div class="menu_title menu_dahsboard"></div>
                 <li class="item">
-                    <div href="#" class="nav_link submenu_item" data-bs-toggle="tooltip" data-bs-placement="right" title="Home">
+                    <a href="../admin_portal/index.php" class="nav_link submenu_item" data-bs-toggle="tooltip" data-bs-placement="right" title="Home">
                         <span class="navlink_icon">
                             <i class="bx bx-home-alt"></i>
                         </span>
                         <span class="navlink">Home</span>
-                    </div>
+                    </a>
                 </li>
             </ul>
             <ul class="menu_items">
-                <div class="menu_title menu_application"></div>
+                <div class="menu_title menu_logbook"></div>
                 <li class="item">
-                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Applications">
+                    <a href="../admin_portal/logbook.php" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="e-LogBook">
                         <span class="navlink_icon">
-                            <i class="bx bxs-folder-open"></i>
+                            <i class="bx bxs-book"></i>
                         </span>
-                        <span class="navlink">Applications</span>
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Archive">
-                        <span class="navlink_icon">
-                            <i class="bx bx-cabinet"></i>
-                        </span>
-                        <span class="navlink">Archive</span>
+                        <span class="navlink">e-LogBook</span>
                     </a>
                 </li>
             </ul>
             <ul class="menu_items">
                 <div class="menu_title menu_setting"></div>
                 <li class="item">
-                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Profile">
+                    <a href="../admin_portal/history.php" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="History">
                         <span class="navlink_icon">
-                            <i class="bx bx-user"></i>
+                            <i class="bx bx-history"></i>
                         </span>
-                        <span class="navlink">Profile</span>
-                    </a>
-                </li>
-                <li class="item">
-                    <a href="#" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="Logs">
-                        <span class="navlink_icon">
-                            <i class="bx bx-file"></i>
-                        </span>
-                        <span class="navlink">Logs</span>
+                        <span class="navlink">History</span>
                     </a>
                 </li>
                 <li class="item">
@@ -119,6 +103,7 @@
         crossorigin="anonymous"
     ></script>
     <script src="../assets/js/sideBar.js"></script>
+    <script src="../assets/js/jQuery.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (window.bootstrap && bootstrap.Tooltip) {
@@ -146,9 +131,6 @@
         });
     </script>
 
-    <div id="main-content">
-        CONTENT
-    </div>
 
 
 

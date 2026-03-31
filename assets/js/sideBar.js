@@ -6,6 +6,7 @@ const sidebarOpen = document.querySelector("#sidebarOpen");
 const sidebarClose = document.querySelector(".collapse_sidebar");
 const sidebarExpand = document.querySelector(".expand_sidebar");
 const sidebarNavLinks = document.querySelectorAll(".sidebar .nav_link[data-href]");
+const THEME_STORAGE_KEY = "ocbo-theme";
 
 sidebarNavLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
@@ -40,14 +41,20 @@ sidebarExpand.addEventListener("click", () => {
         window.updateSidebarTooltips();
     }
 });
+const applyTheme = (theme) => {
+    const isDark = theme === "dark";
+    body.classList.toggle("dark", isDark);
+    darkLight.classList.toggle("bx-moon", isDark);
+    darkLight.classList.toggle("bx-sun", !isDark);
+};
+
+const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+applyTheme(savedTheme === "dark" ? "dark" : "light");
+
 darkLight.addEventListener("click", () => {
-    body.classList.toggle("dark");
-    if (body.classList.contains("dark")) {
-        document.setI
-        darkLight.classList.replace("bx-sun", "bx-moon");
-    } else {
-        darkLight.classList.replace("bx-moon", "bx-sun");
-    }
+    const nextTheme = body.classList.contains("dark") ? "light" : "dark";
+    applyTheme(nextTheme);
+    localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
 });
 // submenuItems.forEach((item, index) => {
 //     item.addEventListener("click", () => {

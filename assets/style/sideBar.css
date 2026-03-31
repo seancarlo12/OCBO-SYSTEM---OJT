@@ -111,8 +111,8 @@
     content: "Dashboard";
 }
 
-.menu_application::before {
-    content: "Applications";
+.menu_logbook::before {
+    content: "LogBook";
 }
 
 .menu_setting::before {
@@ -292,12 +292,11 @@
     padding: 20px;
     transition: margin-left 0.3s ease;
 
-
     /* Use viewport height minus navbar height */
     height: calc(100vh - 65px);
 
     color: var(--grey-color);
-    font-size: 100px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
