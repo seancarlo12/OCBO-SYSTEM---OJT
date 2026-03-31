@@ -1039,30 +1039,34 @@ html.dark .dt-container .dt-paging .dt-paging-button:active {
 
 
 
-.dt-layout-row:not(.dt-layout-table){
+.dt-layout-row:not(.dt-layout-table) {
     padding: 5px 20px;
 }
 
-#myTable{
+#myTable {
     font-size: 15px;
     width: 100%;
-    table-layout: fixed; /* IMPORTANT */
+    table-layout: fixed;
+    /* IMPORTANT */
     user-select: none;
 }
+
 #myTable td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 150px; /* adjust as needed */
+    max-width: 150px;
+    /* adjust as needed */
 }
-#myTable tr:hover{
+
+#myTable tr:hover {
     border-bottom: var(--blue-color) solid 2px;
     /* color: var(--white-color); */
     cursor: pointer;
     font-weight: bold;
 }
 
-.dt-input{
+.dt-input {
     outline: none;
     border: none !important;
     border-radius: 0 !important;
