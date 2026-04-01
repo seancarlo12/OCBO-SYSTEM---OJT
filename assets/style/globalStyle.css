@@ -29,3 +29,10 @@ body.dark {
     --grey-color: #f2f2f2;
     --grey-color-light: #aaa;
 }
+
+
+
+.swal2-toast {
+    background: var(--grey-color) !important;
+    color: var(--white-color) !important;
+}

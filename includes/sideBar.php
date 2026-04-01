@@ -32,7 +32,9 @@
             <i class="bi bi-grid"></i>
             <i class='bx bx-sun' id="darkLight"></i>
             <i class='bx bx-bell'></i>
-            <img src="../assets/images/lerong.jpg" alt="" class="profile" />
+            <i class='bx bx-user-circle'></i>
+            <label id="profile-name">OCBO Admin</label>
+            <!-- <img src="../assets/images/lerong.jpg" alt="" class="profile" /> -->
         </div>
     </nav>
     <!-- sidebar -->

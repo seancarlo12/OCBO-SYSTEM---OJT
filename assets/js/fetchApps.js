@@ -89,6 +89,25 @@ function loadTable() {
 
     table.draw(false);
 
+    $("#myTable tbody tr").each(function () {
+      let data = table.row(this).data();
+      if (!data) return;
+    
+      let rawDate = result.find(r => r.application_no == data[0])?.last_updated;
+      if (!rawDate) return;
+    
+      let lastUpdated = new Date(rawDate);
+      let now = new Date();
+    
+      let diffDays = (now - lastUpdated) / (1000 * 60 * 60 * 24);
+    
+      if (diffDays >= 3) {
+        $(this).addClass("stale-row");
+      } else {
+        $(this).removeClass("stale-row");
+      }
+    });
+
     // 🔥 RESTORE selection AFTER redraw
     window.selectedRowId = currentSelected;
 

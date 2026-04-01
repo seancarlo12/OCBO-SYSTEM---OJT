@@ -17,29 +17,23 @@ $(document).ready(function () {
     $("#myTable tbody").on("click", "tr", function () {
       let data = table.row(this).data();
       if (!data) return;
-
+    
+      let rowId = data[0];
+    
+      // If already selected → unselect
+      if (window.selectedRowId === rowId) {
+        clearSelection();
+        window.selectedRowId = null;
+        return;
+      }
+    
+      // Otherwise select new row
       clearSelection();
-
-      window.selectedRowId = data[0];
-
+      window.selectedRowId = rowId;
       $(this).addClass("selected-row");
     });
 
-    // RESTORE ON DRAW (after reload, pagination, etc.)
-    table.on("draw", function () {
-      if (!window.selectedRowId) return;
 
-      let rows = table.rows().nodes();
-
-      $(rows).each(function () {
-        let data = table.row(this).data();
-        if (!data) return;
-
-        if (data[0] === window.selectedRowId) {
-          $(this).addClass("selected-row");
-        }
-      });
-    });
 
     table.on("draw", function () {
       applySelectedHighlight();

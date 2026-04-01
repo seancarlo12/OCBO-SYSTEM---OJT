@@ -318,3 +318,8 @@
         padding: 15px;
     }
 }
+
+
+#profile-name {
+    color: var(--grey-color);
+}

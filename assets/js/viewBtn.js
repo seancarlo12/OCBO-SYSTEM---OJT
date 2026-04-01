@@ -1,6 +1,9 @@
 function openViewModal() {
   if (!window.selectedRowId) {
-    alert("No row selected");
+    Toast.fire({
+      icon: 'error',
+      title: 'No row selected'
+    });
     return;
   }
 

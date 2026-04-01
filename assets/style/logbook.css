@@ -1,3 +1,6 @@
+#myTable{
+    text-transform: uppercase !important;
+}
 #table-container {
     width: 100%;
     height: 100%;
@@ -18,7 +21,7 @@
 #control-table {
     padding: 10px;
     border-bottom: var(--blue-color) 4px solid;
-
+    background-color: var(--blue-color);
     display: flex;
     gap: 15px;
 
@@ -31,9 +34,9 @@
     outline: none;
     border-radius: 5px;
     color: var(--grey-color);
-    border: var(--grey-color-light) 2px solid;
+    border: 1px solid var(--blue-color);
     text-transform: uppercase;
-
+    background: var(--white-color);
     display: flex;
     gap: 5px;
 }
@@ -43,32 +46,42 @@
 }
 
 
-#control-table button:hover {}
+#control-table button:active {
+    outline: none;
+    box-shadow: none;
+    transform: scale(0.9);
+    transition: 200ms;
+}
 
+#control-table button{
+    font-weight: bold;
+}
+#control-table button:hover{
+    color: white;
+}
 
 #add-row:hover {
-    background: #4070f4;
-    color: var(--white-color);
+    background: #174ad4;
 }
 
 #edit-row:hover {
     background: orange;
-    color: var(--white-color);
 }
 
 #delete-row:hover {
-    background: red;
-    color: var(--white-color);
+    background: rgb(244, 13, 13);
+}
+#delete-row {
+    margin-left: auto;
 }
 
-#save-row:hover {
+
+/* #save-row:hover {
     background: green;
-    color: var(--white-color);
-}
+} */
 
 #view-row:hover {
     background: rgb(255, 0, 208);
-    color: var(--white-color);
 }
 
 .selected-row {
@@ -95,6 +108,7 @@
 
 .modal-title {
     color: var(--white-color);
+    font-weight: bolder;
 }
 
 .info-box {
@@ -121,3 +135,44 @@
     color: #212529;
     word-break: break-word;
 }
+.btn-close{
+    color: var(--white-color) !important;
+}
+
+
+#editForm input,#editForm select, #editForm textarea{
+    color: var(--grey-color);
+    background: var(--white-color);
+}
+
+#editForm label{
+    
+    margin-top: 10px !important;
+    font-size: 12px;
+    color: var(--grey-color);
+    margin-bottom: 2px;
+    display: block;
+}
+
+#plan-type-container label{
+    color: var(--grey-color);
+}
+
+#editModal .btn-secondary{
+    background: none;
+    border: 1px solid var(--grey-color);
+    color: var(--grey-color);
+}
+#editModal .btn-primary{
+    background: var(--blue-color);
+    border: 1px solid var(--blue-color);
+    color: var(--white-color);
+}
+
+#editModal .modal-footer{
+    background: var(--white-color);
+}
+
+.stale-row {
+    box-shadow: inset 4px 0 0 red;
+  }
