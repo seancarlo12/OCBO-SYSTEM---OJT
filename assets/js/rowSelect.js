@@ -17,27 +17,29 @@ $(document).ready(function () {
     $("#myTable tbody").on("click", "tr", function () {
       let data = table.row(this).data();
       if (!data) return;
-    
+
+      if (data[9] === "Removed") {
+        $(this).addClass("removed-row");
+      }
+
       let rowId = data[0];
-    
+
       // If already selected → unselect
       if (window.selectedRowId === rowId) {
         clearSelection();
         window.selectedRowId = null;
         return;
       }
-    
+
       // Otherwise select new row
       clearSelection();
       window.selectedRowId = rowId;
       $(this).addClass("selected-row");
     });
 
-
-
-    table.on("draw", function () {
-      applySelectedHighlight();
-    });
+    // table.on("draw", function () {
+    //   applySelectedHighlight();
+    // });
 
     // RESET ON PAGE / SORT / SEARCH
     table.on("page.dt order.dt search.dt", function () {
@@ -48,3 +50,20 @@ $(document).ready(function () {
 
   initRowSelect();
 });
+
+
+function validateSelectedRow() {
+  let exists = false;
+
+  window.table.rows().every(function () {
+    let data = this.data();
+    if (data && data[0] == window.selectedRowId) {
+      exists = true;
+    }
+  });
+
+  if (!exists) {
+    window.selectedRowId = null;
+    $("#myTable tbody tr").removeClass("selected-row");
+  }
+}

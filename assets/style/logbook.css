@@ -135,17 +135,17 @@
     color: #212529;
     word-break: break-word;
 }
-.btn-close{
-    color: var(--white-color) !important;
-}
 
+#editForm input::placeholder, #addAppForm input::placeholder {
+    color: var(--grey-color) !important;
+  }
 
-#editForm input,#editForm select, #editForm textarea{
+#editForm input,#editForm select, #editForm textarea, #addAppModal input, #addAppModal select, #addAppModal textarea{
     color: var(--grey-color);
     background: var(--white-color);
 }
 
-#editForm label{
+#editForm label,#addAppModal label{
     
     margin-top: 10px !important;
     font-size: 12px;
@@ -158,21 +158,45 @@
     color: var(--grey-color);
 }
 
-#editModal .btn-secondary{
+#editModal .btn-secondary, #addAppModal .btn-secondary{
     background: none;
     border: 1px solid var(--grey-color);
     color: var(--grey-color);
 }
-#editModal .btn-primary{
+#editModal .btn-primary, #addAppModal .btn-primary{
     background: var(--blue-color);
     border: 1px solid var(--blue-color);
     color: var(--white-color);
 }
 
-#editModal .modal-footer{
+#editModal .modal-footer, #addAppModal .modal-footer{
     background: var(--white-color);
 }
 
 .stale-row {
     box-shadow: inset 4px 0 0 red;
+  }
+
+  .removed-row {
+    opacity: 0.5;
+    /* pointer-events: none; */
+  }
+
+  .btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none; /* prevents clicking */
+  }
+
+  #control-table label{
+    color: var(--white-color) !important;
+    margin-top: auto;
+  }
+
+  .text-orange {
+    color: #fd7e14; /* Bootstrap orange */
+  }
+  
+  .text-purple {
+    color: #6f42c1; /* Bootstrap purple */
   }

@@ -26,7 +26,11 @@ include_once '../config/db.php';
         <button id="add-row"> <i class="bx bx-plus"></i> Add</button>
         <button id="edit-row"> <i class="bx bx-edit-alt"></i> Edit</button>
         <button id="view-row"> <i class="bx bx-book-open"></i> View</button>
-        <button id="delete-row"> <i class="bx bx-trash"></i> Delete</button>
+        <label>
+          <input type="checkbox" id="toggleRemoved" style="text-transform:uppercase;">
+          Show <b>Removed</b> and <b>Released</b> Applications
+        </label>
+        <button id="delete-row"> <i class="bx bx-trash"></i> Remove</button>
         <!-- <button id="save-row"> <i class="bx bx-save"></i> Save</button> -->
       </div>
       <table id="myTable">
@@ -73,6 +77,7 @@ include_once '../config/db.php';
         pageLength: 16,
         scrollY: "63vh", // fixed height
         scrollCollapse: false,
+        stateSave: true,
         // autoWidth: false,
 
         columnDefs: [{
@@ -111,31 +116,31 @@ include_once '../config/db.php';
           topEnd: '',
           bottomStart: 'info',
           bottomEnd: 'paging'
-        }
+        },
+
       });
 
 
       function applyTooltips() {
         $('#myTable tbody td').each(function() {
 
-          // 🔥 destroy existing tooltip instance (IMPORTANT)
           let tooltip = bootstrap.Tooltip.getInstance(this);
-          if (tooltip) {
-            tooltip.dispose();
-          }
+          if (tooltip) tooltip.dispose();
 
-          // remove attributes
-          $(this).removeAttr('data-bs-toggle data-bs-placement title');
+          $(this).removeAttr('data-bs-toggle data-bs-placement title data-bs-title');
 
-          // check if truncated
-          if (this.offsetWidth < this.scrollWidth) {
+          let fullText = $(this).find('span').data('full');
+          let displayText = $(this).text().trim();
+
+          let tooltipText = fullText || displayText;
+
+          if (this.offsetWidth < this.scrollWidth || fullText) {
             $(this).attr({
               'data-bs-toggle': 'tooltip',
               'data-bs-placement': 'top',
-              'title': $(this).text().trim()
+              'data-bs-title': tooltipText
             });
 
-            // 🔥 reinitialize tooltip
             new bootstrap.Tooltip(this);
           }
         });
@@ -147,6 +152,7 @@ include_once '../config/db.php';
       // Reapply after DataTables redraw
       table.on('draw', function() {
         applyTooltips();
+        applyRowStyles();
       });
 
 
@@ -294,6 +300,9 @@ include_once '../config/db.php';
                   <option value="Processing">Processing</option>
                   <option value="Rechecking">Rechecking</option>
                   <option value="Returned">Returned</option>
+                  <option value="For Order of Payment">For Order of Payment</option>
+                  <option value="Releasing">Releasing</option>
+                  <option value="Released">Released</option>
                   <option value="OTHER">Other...</option>
                 </select>
 
@@ -310,7 +319,7 @@ include_once '../config/db.php';
             <div class="col-12">
               <label class="form-label">Plan Type</label>
 
-              <div class="d-flex flex-wrap gap-2" id="plan-type-container"> 
+              <div class="d-flex flex-wrap gap-2" id="plan-type-container">
 
                 <input type="checkbox" class="btn-check planType" id="pt1" value="Architectural">
                 <label class="btn rounded-pill" for="pt1">Architectural</label>
@@ -344,6 +353,147 @@ include_once '../config/db.php';
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-primary" id="updateRow">Update</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ADD APPLICATION MODAL -->
+  <div class="modal fade" id="addAppModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Add Application</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="addAppForm">
+
+            <div class="row">
+
+              <!-- LEFT SIDE -->
+              <div class="col-md-6">
+
+                <div class="mb-2">
+                  <label>Name</label>
+                  <input maxlength="150" type="text" id="addName" name="addName" class="form-control" required>
+                </div>
+
+                <div class="mb-2">
+                  <label>Project Title</label>
+                  <input maxlength="200" type="text" id="addProject" name="addProject" class="form-control">
+                </div>
+
+                <div class="mb-2">
+                  <label>Application Type</label>
+                  <select id="addApplicationType" name="application_type" class="form-control">
+                    <option value="" hidden>Select Type</option>
+                    <option value="Building Permit">Building Permit</option>
+                    <option value="Occupancy Permit">Occupancy Permit</option>
+                    <option value="Zoning Clearance">Zoning Clearance</option>
+                    <option value="OTHER">Other...</option>
+                  </select>
+
+                  <input maxlength="150" type="text" id="addApplicationTypeOther"
+                    class="form-control mt-2"
+                    placeholder="Enter custom application type"
+                    style="display:none;">
+                </div>
+
+                <div class="mb-2">
+                  <label>Status</label>
+                  <select id="addStatus" name="status" class="form-control">
+                    <option value="" hidden>Select Status</option>
+                    <option value="Receiving">Receiving</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Rechecking">Rechecking</option>
+                    <option value="Returned">Returned</option>
+                    <option value="For Order of Payment">For Order of Payment</option>
+                    <option value="Releasing">Releasing</option>
+                    <option value="Released">Released</option>
+                    <option value="OTHER">Other...</option>
+                  </select>
+
+                  <input maxlength="150" type="text" id="addStatusOther"
+                    class="form-control mt-2"
+                    placeholder="Enter custom status"
+                    style="display:none;">
+                </div>
+
+              </div>
+
+              <!-- RIGHT SIDE -->
+              <div class="col-md-6">
+
+                <div class="mb-2">
+                  <label>Contact No</label>
+                  <input type="text" id="addContact" name="addContact" class="form-control" maxlength="11" inputmode="numeric" placeholder="' N/A '">
+                </div>
+
+                <div class="mb-2">
+                  <label>Location</label>
+                  <input maxlength="200" type="text" id="addLocation" name="addLocation" class="form-control">
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- 🔥 FULL WIDTH BELOW -->
+
+            <div class="row mt-2">
+
+              <!-- Plan Type -->
+              <div class="col-12 mb-3">
+                <label class="form-label">Plan Type</label>
+
+                <div class="d-flex flex-wrap gap-2">
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt1" value="Architectural">
+                  <label class="btn rounded-pill" for="add_pt1">Architectural</label>
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt2" value="Structural">
+                  <label class="btn rounded-pill" for="add_pt2">Structural</label>
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt3" value="Plumbing">
+                  <label class="btn rounded-pill" for="add_pt3">Plumbing</label>
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt4" value="Electrical">
+                  <label class="btn rounded-pill" for="add_pt4">Electrical</label>
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt5" value="Mechanical">
+                  <label class="btn rounded-pill" for="add_pt5">Mechanical</label>
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt6" value="Electronics">
+                  <label class="btn rounded-pill" for="add_pt6">Electronics</label>
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt7" value="Geodectic">
+                  <label class="btn rounded-pill" for="add_pt7">Geodectic</label>
+
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt8" value="Zoning">
+                  <label class="btn rounded-pill" for="add_pt8">Zoning</label>
+
+                </div>
+              </div>
+
+              <!-- Comments -->
+              <div class="col-12 mb-2">
+                <label>Comments</label>
+                <textarea id="addComments" name="addComments" class="form-control"></textarea>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveAppBtn">Save</button>
         </div>
 
       </div>

@@ -1,8 +1,8 @@
 function openViewModal() {
   if (!window.selectedRowId) {
     Toast.fire({
-      icon: 'error',
-      title: 'No row selected'
+      icon: "error",
+      title: "No row selected",
     });
     return;
   }
@@ -25,6 +25,36 @@ function openViewModal() {
   $("#v_status").text(selected[9]);
   $("#v_updated").text($(selected[10]).text());
 
+  let status = selected[9];
+
+  $("#v_status")
+    .text(status)
+    .removeClass("text-primary text-warning text-danger text-orange text-purple text-info text-success");
+  
+  // apply colors
+  switch (status) {
+    case "Receiving":
+      $("#v_status").addClass("text-primary"); // blue
+      break;
+    case "Processing":
+      $("#v_status").addClass("text-warning"); // yellow
+      break;
+    case "Returned":
+      $("#v_status").addClass("text-danger"); // red
+      break;
+    case "Rechecking":
+      $("#v_status").addClass("text-orange"); // custom
+      break;
+    case "For Order Of Payment":
+      $("#v_status").addClass("text-purple"); // custom
+      break;
+    case "Releasing":
+      $("#v_status").addClass("text-info"); // cyan
+      break;
+    case "Released":
+      $("#v_status").addClass("text-success"); // green
+      break;
+  }
   // Show modal
   let modal = new bootstrap.Modal(document.getElementById("viewModal"));
   modal.show();
