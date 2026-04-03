@@ -1,8 +1,6 @@
-
-
 $(document).on("change", "#toggleRemoved", function () {
   console.log("TOGGLE CHANGED"); // test
-    // 🔥 clear selection
+  //  clear selection
   window.selectedRowId = null;
   $("#myTable tbody tr").removeClass("selected-row");
 
@@ -67,9 +65,9 @@ function loadTable() {
 
     // include toggle state
     let newHash = JSON.stringify(result) + showRemoved;
-    
+
     if (newHash === lastDataHash) return;
-    
+
     lastDataHash = newHash;
 
     $('[data-bs-toggle="tooltip"]').tooltip("dispose");
@@ -77,9 +75,11 @@ function loadTable() {
     table.clear();
 
     result.forEach(function (row) {
-
       // ❌ skip removed if toggle is OFF
-      if (!showRemoved && (row.status === "Removed" || row.status === "Released")) {
+      if (
+        !showRemoved &&
+        (row.status === "Removed" || row.status === "Released")
+      ) {
         return;
       }
 
@@ -92,28 +92,32 @@ function loadTable() {
         row.location,
         row.plan_type,
         row.comments,
-      
+
         // DATE RECEIVED
         `<span data-full="${formatDateTime(row.date_received)}">
           ${formatDate(row.date_received)}
         </span>`,
-      
+
         row.status,
-      
+
         // LAST UPDATED
         `<span data-full="${formatDateTime(row.last_updated)}">
           ${formatDate(row.last_updated)}
-        </span>`
+        </span>`,
       ]);
     });
 
     table.draw(false);
 
+        // apply URL search ONCE after table render
     if (window.urlSearchAppNo) {
       table.search(window.urlSearchAppNo).draw(false);
+
+      // 🔥 clear immediately so it won't re-trigger
+      window.urlSearchAppNo = null;
     }
 
-    // 🔥 RESTORE selection AFTER redraw
+    //  RESTORE selection AFTER redraw
     window.selectedRowId = currentSelected;
 
     applySelectedHighlight();
@@ -121,8 +125,6 @@ function loadTable() {
   });
   console.log("fetchapp");
 }
-
-
 
 function applyRowStyles() {
   $("#myTable tbody tr").each(function () {
@@ -141,7 +143,8 @@ function applyRowStyles() {
     // ✅ Stale styling
     // last_updated cell is HTML (span with tooltip title), extract real datetime first.
     let rawDate = data[10];
-    let dateSource = $("<div>").html(rawDate).find("span").attr("title") || rawDate;
+    let dateSource =
+      $("<div>").html(rawDate).find("span").attr("title") || rawDate;
 
     // Fallback: support strings like "2026-04-02 10:20:00"
     let normalized = String(dateSource).trim().replace(" ", "T");

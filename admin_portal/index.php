@@ -18,11 +18,12 @@ include_once '../config/db.php';
 
 <body>
     <div id="main-content">
+    <h2 id="welc">System Overview</h2>
 
         <!-- TOP COUNTS -->
-        <div class="card a1">Applications Today<br><span id="todayCount">0</span></div>
-        <div class="card a2">Applications this Week<br><span id="weekCount">0</span></div>
-        <div class="card a3">Applications this Month<br><span id="monthCount">0</span></div>
+        <div class="card a1"><span class="count-title">Applications Today</span><br><span id="todayCount">0</span></div>
+        <div class="card a2"><span class="count-title">Applications this Week</span><br><span id="weekCount">0</span></div>
+        <div class="card a3"><span class="count-title">Applications this Month</span><br><span id="monthCount">0</span></div>
 
         <!-- PIE CHARTS -->
         <div class="right-grid">
@@ -49,8 +50,13 @@ include_once '../config/db.php';
         </div>
 
         <div class="card a8">
-            <h3 class="card-title">Needs Follow Up</h3>
-
+            <div class="followup-header">
+                <h3 class="card-title">Needs Follow Up <small id="exc">(Applications with no updates for the last 3 or more days)</small></h3>
+                <div class="search-wrapper">
+                    <label for="followupSearch">Search:</label>
+                    <input type="text" id="followupSearch" class="form-control" placeholder="Search applications...">
+                </div>
+            </div>
             <table class="followup-table">
                 <thead>
                     <tr>
@@ -72,7 +78,19 @@ include_once '../config/db.php';
 
     <script>
         $(document).ready(function() {
+
             loadDashboard();
+        });
+
+
+        $(document).on("keyup", "#followupSearch", function() {
+            let value = $(this).val().toLowerCase();
+
+            $("#followupBody tr").filter(function() {
+                $(this).toggle(
+                    $(this).text().toLowerCase().indexOf(value) > -1
+                );
+            });
         });
 
         /* =========================
@@ -307,7 +325,7 @@ include_once '../config/db.php';
 
                     if (isNaN(lastUpdated)) return;
 
-                    // 🔥 Check if more than 3 days
+                    // Check if more than 3 days
                     let diffDays = (now - lastUpdated) / (1000 * 60 * 60 * 24);
 
                     if (diffDays >= 3) {
@@ -346,9 +364,41 @@ include_once '../config/db.php';
         function formatDate(datetime) {
             if (!datetime) return "N/A";
 
-            let d = new Date(datetime.replace(' ', 'T'));
+            let past = new Date(datetime.replace(' ', 'T'));
+            let now = new Date();
 
-            return d.toLocaleDateString();
+            let diffMs = now - past;
+
+            if (diffMs < 0) return "In the future";
+
+            let diffSeconds = Math.floor(diffMs / 1000);
+            let diffMinutes = Math.floor(diffSeconds / 60);
+            let diffHours = Math.floor(diffMinutes / 60);
+            let diffDays = Math.floor(diffHours / 24);
+            let diffMonths = Math.floor(diffDays / 30);
+            let diffYears = Math.floor(diffDays / 365);
+
+            if (diffYears > 0) {
+                return diffYears === 1 ? "1 year ago" : `${diffYears} years ago`;
+            }
+
+            if (diffMonths > 0) {
+                return diffMonths === 1 ? "1 month ago" : `${diffMonths} months ago`;
+            }
+
+            if (diffDays > 0) {
+                return diffDays === 1 ? "1 day ago" : `${diffDays} days ago`;
+            }
+
+            if (diffHours > 0) {
+                return diffHours === 1 ? "1 hour ago" : `${diffHours} hours ago`;
+            }
+
+            if (diffMinutes > 0) {
+                return diffMinutes === 1 ? "1 minute ago" : `${diffMinutes} minutes ago`;
+            }
+
+            return diffSeconds <= 1 ? "Just now" : `${diffSeconds} seconds ago`;
         }
     </script>
 

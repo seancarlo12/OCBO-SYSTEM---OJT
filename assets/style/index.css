@@ -6,18 +6,27 @@
   
     /* fixed proportions */
     grid-template-columns: 1.2fr 1.2fr 1.2fr 1fr;
-    grid-template-rows: 15% 35% 40%;  /* 👈 fixed height ratio */
+    grid-template-rows: 15% 35% 50%;  /* 👈 fixed height ratio */
   
     grid-template-areas:
       "a1 a2 a3 a4"
       "a6 a6 a7 a5"
       "a8 a8 a8 a8";
+      position: relative;
   }
   
   /* IMPORTANT: force items to stretch */
   #main-content > div {
     width: 100%;
     height: 100%;   /* 👈 THIS is the key */
+  }
+
+  #welc{
+    position: absolute;
+    top: 50px;
+    left: 100px;
+    text-transform: uppercase;
+    font-weight: bold;
   }
   
   /* areas */
@@ -91,13 +100,19 @@
     display: flex;
     flex-direction: column;
 }
-
-.card-title {
-    font-size: 12px;
+.card-title, .count-title{
+    font-size: 15px !important;
+    text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 10px;
     font-weight: bold;
 }
+
+.card-title small#exc {
+    text-transform: none;
+    font-size: 0.75em;
+    color: gray; /* or whatever you want */
+  }
 
 /* List styling */
 .status-list {
@@ -106,7 +121,7 @@
     margin: 0;
 
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 🔥 2 columns */
+    grid-template-columns: 1fr 1fr; /*  2 columns */
     gap: 8px;
 }
 /* Each item */
@@ -125,7 +140,7 @@
 
 /* Push count to far right */
 .status-count {
-    margin-left: auto; /* 🔥 key fix */
+    margin-left: auto; /*  key fix */
     font-weight: bold;
 }
 
@@ -135,6 +150,7 @@
 #monthCount {
     font-size: 32px;   /* adjust as needed */
     font-weight: 700;
+    margin-top: -20px;
 }
 
 .a1,
@@ -155,14 +171,41 @@
 .followup-table th {
     text-align: left;
     padding: 6px;
-    background: #f5f5f5;
+    background: #4070f4;
+    color: white;
 }
 
 .followup-table td {
     padding: 6px;
     border-bottom: 1px solid #eee;
 }
-
 .followup-table tr:hover {
     background: #fafafa;
+}
+
+#followupSearch {
+    outline: none;
+    border: none !important;
+    border-radius: 0 !important;
+    width: 500px !important;
+    border-bottom: 2px solid grey !important;
+    box-shadow: none;
+    height: 25px;
+}
+.followup-header {
+    display: flex;
+    justify-content: space-between; /* pushes search to the right */
+    align-items: center; /* vertically align */
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-wrapper label {
+    font-size: 15px;
+    font-weight: normal;
 }

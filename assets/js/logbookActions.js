@@ -303,7 +303,7 @@ $(document).on("click", "#delete-row", function () {
             title: "Application: " + selectedId + " removed Successfully",
           });
 
-          loadTable(); // 🔥 reload data
+          loadTable(); //  reload data
 
         } else {
           Swal.fire("Error", response.message, "error");
@@ -484,7 +484,7 @@ $(document).on("click", "#saveAppBtn", function (e) {
 
       if (res.status === "success") {
 
-        let appNo = res.appNo; // 🔥 important (from DB)
+        let appNo = res.appNo; //  important (from DB)
 
         let newRow = [
           appNo,

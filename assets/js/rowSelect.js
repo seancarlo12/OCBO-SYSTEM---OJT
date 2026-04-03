@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   function initRowSelect() {
     if (!window.table) {
       setTimeout(initRowSelect, 100);
@@ -49,27 +48,25 @@ $(document).ready(function () {
   // =========================
   // AUTO SELECT FROM URL
   // =========================
-  
+
   window.urlSearchAppNo = null;
 
   function applySearchFromURL() {
-
     const url = new URL(window.location.href);
     const appNo = url.searchParams.get("appNo");
   
     if (!appNo) return;
   
-    window.urlSearchAppNo = appNo; // 🔥 store it
+    window.urlSearchAppNo = appNo;
   
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
   // =========================
   // INIT
   // =========================
   initRowSelect();
   applySearchFromURL();
-
 });
-
 
 function validateSelectedRow() {
   let exists = false;

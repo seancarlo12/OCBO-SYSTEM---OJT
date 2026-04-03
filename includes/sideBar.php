@@ -31,7 +31,7 @@
         <div class="navbar_content">
             <i class="bi bi-grid"></i>
             <i class='bx bx-sun' id="darkLight"></i>
-            <i class='bx bx-bell'></i>
+            <!-- <i class='bx bx-bell'></i> -->
             <i class='bx bx-user-circle'></i>
             <label id="profile-name">OCBO Admin</label>
             <!-- <img src="../assets/images/lerong.jpg" alt="" class="profile" /> -->
@@ -58,11 +58,11 @@
                         <span class="navlink_icon">
                             <i class="bx bxs-book"></i>
                         </span>
-                        <span class="navlink">e-LogBook</span>
+                        <span class="navlink">Applications</span>
                     </a>
                 </li>
             </ul>
-            <ul class="menu_items">
+            <!-- <ul class="menu_items">
                 <div class="menu_title menu_setting"></div>
                 <li class="item">
                     <a href="../admin_portal/history.php" class="nav_link" data-bs-toggle="tooltip" data-bs-placement="right" title="History">
@@ -82,7 +82,7 @@
                 </li>
 
 
-            </ul>
+            </ul> -->
             <!-- Sidebar Open / Close -->
             <div class="bottom_content">
                 <div class="bottom expand_sidebar" data-bs-toggle="tooltip" data-bs-placement="right" title="Expand sidebar">
