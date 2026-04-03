@@ -109,6 +109,10 @@ function loadTable() {
 
     table.draw(false);
 
+    if (window.urlSearchAppNo) {
+      table.search(window.urlSearchAppNo).draw(false);
+    }
+
     // 🔥 RESTORE selection AFTER redraw
     window.selectedRowId = currentSelected;
 

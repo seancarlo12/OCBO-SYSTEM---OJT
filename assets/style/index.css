@@ -1,0 +1,168 @@
+#main-content {
+    height: 90vh;            /* fixed container height */
+    display: grid;
+    gap: 50px;
+    padding: 100px;
+  
+    /* fixed proportions */
+    grid-template-columns: 1.2fr 1.2fr 1.2fr 1fr;
+    grid-template-rows: 15% 35% 40%;  /* 👈 fixed height ratio */
+  
+    grid-template-areas:
+      "a1 a2 a3 a4"
+      "a6 a6 a7 a5"
+      "a8 a8 a8 a8";
+  }
+  
+  /* IMPORTANT: force items to stretch */
+  #main-content > div {
+    width: 100%;
+    height: 100%;   /* 👈 THIS is the key */
+  }
+  
+  /* areas */
+  .a1 { grid-area: a1; }
+  .a2 { grid-area: a2; }
+  .a3 { grid-area: a3; }
+  .a4 { grid-area: a4; }
+  .a5 { grid-area: a5; }
+  .a6 { grid-area: a6; }
+  .a7 { grid-area: a7; }
+  .a8 { grid-area: a8; }
+  
+  /* styling */
+  .card {
+    /* background: var(--white-color); */
+    background: white;
+    color: grey;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden; /* prevents content from stretching */
+  }
+
+
+  /* RIGHT SIDE (CIRCLES CONTROL HEIGHT) */
+.right-grid {
+    flex: 1;
+  position: relative;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr); /* 👈 equal height */
+    gap: 20px;
+  }
+  
+.right-grid span{
+    position: absolute;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    /* border: 1px solid red; */
+}
+
+.right-grid #atp{
+    top: -30px;
+}
+.right-grid #ptp{
+    bottom: -305px;
+}
+    
+
+/* CIRCLE */
+.circle {
+  background: var(--white-color);
+  border-radius: 50%;
+
+  width: 180px;
+  height: 180px;
+
+  margin: auto; /* centers inside each row */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+.status-card {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* List styling */
+.status-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 🔥 2 columns */
+    gap: 8px;
+}
+/* Each item */
+.status-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 6px;
+    background: #f5f5f5;
+    font-size: 15px;
+    transition: 0.2s;
+    color: grey;
+    font-weight: normal;
+}
+
+
+/* Push count to far right */
+.status-count {
+    margin-left: auto; /* 🔥 key fix */
+    font-weight: bold;
+}
+
+
+#todayCount,
+#weekCount,
+#monthCount {
+    font-size: 32px;   /* adjust as needed */
+    font-weight: 700;
+}
+
+.a1,
+.a2,
+.a3{
+    text-align: center;
+}
+
+
+
+
+.followup-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.followup-table th {
+    text-align: left;
+    padding: 6px;
+    background: #f5f5f5;
+}
+
+.followup-table td {
+    padding: 6px;
+    border-bottom: 1px solid #eee;
+}
+
+.followup-table tr:hover {
+    background: #fafafa;
+}

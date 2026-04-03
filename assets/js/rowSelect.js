@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   function initRowSelect() {
     if (!window.table) {
       setTimeout(initRowSelect, 100);
@@ -13,7 +14,9 @@ $(document).ready(function () {
       $("#myTable tbody tr").removeClass("selected-row");
     }
 
+    // =========================
     // CLICK ROW
+    // =========================
     $("#myTable tbody").on("click", "tr", function () {
       let data = table.row(this).data();
       if (!data) return;
@@ -24,31 +27,47 @@ $(document).ready(function () {
 
       let rowId = data[0];
 
-      // If already selected → unselect
+      // Toggle select
       if (window.selectedRowId === rowId) {
         clearSelection();
-        window.selectedRowId = null;
         return;
       }
 
-      // Otherwise select new row
       clearSelection();
       window.selectedRowId = rowId;
       $(this).addClass("selected-row");
     });
 
-    // table.on("draw", function () {
-    //   applySelectedHighlight();
-    // });
-
-    // RESET ON PAGE / SORT / SEARCH
+    // =========================
+    // RESET ON TABLE CHANGE
+    // =========================
     table.on("page.dt order.dt search.dt", function () {
       clearSelection();
-      console.log("cleared");
     });
   }
 
+  // =========================
+  // AUTO SELECT FROM URL
+  // =========================
+  
+  window.urlSearchAppNo = null;
+
+  function applySearchFromURL() {
+
+    const url = new URL(window.location.href);
+    const appNo = url.searchParams.get("appNo");
+  
+    if (!appNo) return;
+  
+    window.urlSearchAppNo = appNo; // 🔥 store it
+  
+  }
+  // =========================
+  // INIT
+  // =========================
   initRowSelect();
+  applySearchFromURL();
+
 });
 
 

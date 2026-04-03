@@ -339,8 +339,8 @@ include_once '../config/db.php';
                 <input type="checkbox" class="btn-check planType" id="pt6" value="Electronics">
                 <label class="btn rounded-pill" for="pt6">Electronics</label>
 
-                <input type="checkbox" class="btn-check planType" id="pt7" value="Geodectic">
-                <label class="btn rounded-pill" for="pt7">Geodectic</label>
+                <input type="checkbox" class="btn-check planType" id="pt7" value="Geodetic">
+                <label class="btn rounded-pill" for="pt7">Geodetic</label>
 
                 <input type="checkbox" class="btn-check planType" id="pt8" value="Zoning">
                 <label class="btn rounded-pill" for="pt8">Zoning</label>
@@ -471,8 +471,8 @@ include_once '../config/db.php';
                   <input type="checkbox" class="btn-check addPlanType" id="add_pt6" value="Electronics">
                   <label class="btn rounded-pill" for="add_pt6">Electronics</label>
 
-                  <input type="checkbox" class="btn-check addPlanType" id="add_pt7" value="Geodectic">
-                  <label class="btn rounded-pill" for="add_pt7">Geodectic</label>
+                  <input type="checkbox" class="btn-check addPlanType" id="add_pt7" value="Geodetic">
+                  <label class="btn rounded-pill" for="add_pt7">Geodetic</label>
 
                   <input type="checkbox" class="btn-check addPlanType" id="add_pt8" value="Zoning">
                   <label class="btn rounded-pill" for="add_pt8">Zoning</label>
