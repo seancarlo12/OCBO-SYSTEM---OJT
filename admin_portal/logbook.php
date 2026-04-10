@@ -1,7 +1,13 @@
 <?php
+session_start();
 include_once '../includes/sideBar.php';
 include_once '../config/db.php';
 
+
+if (!isset($_SESSION['account_id'])) {
+  header("Location: login.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>

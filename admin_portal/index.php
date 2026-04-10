@@ -1,6 +1,13 @@
 <?php
+session_start();
 include_once '../includes/sideBar.php';
 include_once '../config/db.php';
+
+
+if (!isset($_SESSION['account_id'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +25,7 @@ include_once '../config/db.php';
 
 <body>
     <div id="main-content">
-    <h2 id="welc">System Overview</h2>
+        <h2 id="welc">System Overview</h2>
 
         <!-- TOP COUNTS -->
         <div class="card a1"><span class="count-title">Applications Today</span><br><span id="todayCount">0</span></div>
@@ -51,25 +58,34 @@ include_once '../config/db.php';
 
         <div class="card a8">
             <div class="followup-header">
-                <h3 class="card-title">Needs Follow Up <small id="exc">(Applications with no updates for the last 3 or more days)</small></h3>
+                <h3 class="card-title">
+                    Needs Follow Up
+                    <small id="exc">(Applications with no updates for the last 3 or more days)</small>
+                </h3>
+
                 <div class="search-wrapper">
                     <label for="followupSearch">Search:</label>
                     <input type="text" id="followupSearch" class="form-control" placeholder="Search applications...">
                 </div>
             </div>
-            <table class="followup-table">
-                <thead>
-                    <tr>
-                        <th>App No</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                        <th>Last Updated</th>
-                    </tr>
-                </thead>
-                <tbody id="followupBody"></tbody>
-            </table>
+
+            <!-- ✅ wrapper added -->
+            <div class="table-wrapper">
+                <table class="followup-table">
+                    <thead>
+                        <tr>
+                            <th>App No</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody id="followupBody"></tbody>
+                </table>
+            </div>
         </div>
 
     </div>
@@ -334,6 +350,7 @@ include_once '../config/db.php';
                                         <tr>
                                             <td>${row.application_no}</td>
                                             <td>${row.name}</td>
+                                            <td>${row.contact_no}</td>
                                             <td>${row.application_type}</td>
                                             <td>${row.location}</td>
                                             <td>${status}</td>

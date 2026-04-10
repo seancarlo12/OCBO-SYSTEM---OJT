@@ -1,3 +1,16 @@
+<?php
+
+// 🔒 Prevent browser caching
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+if (!isset($_SESSION['account_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <!-- Coding by CodingNepal || www.codingnepalweb.com -->
 <html lang="en">
@@ -32,8 +45,11 @@
             <i class="bi bi-grid"></i>
             <i class='bx bx-sun' id="darkLight"></i>
             <!-- <i class='bx bx-bell'></i> -->
-            <i class='bx bx-user-circle'></i>
-            <label id="profile-name">OCBO Admin</label>
+            <!-- <i class='bx bx-user-circle'></i> -->
+             <label id="profile-name">
+                <?php echo $_SESSION['username']; ?>
+            </label>
+            <a href="logout.php"><i class='bx bx-log-out'></i></a>
             <!-- <img src="../assets/images/lerong.jpg" alt="" class="profile" /> -->
         </div>
     </nav>
