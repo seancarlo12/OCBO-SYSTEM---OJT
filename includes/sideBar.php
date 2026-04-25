@@ -19,16 +19,35 @@ if (!isset($_SESSION['account_id'])) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Boxicons CSS -->
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+     <link rel="stylesheet" href="../assets/style/boxIcon.css">
+    
     <!-- Bootstrap CSS -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../assets/style/bs.css" />
     <title>OCBO e-LogBook System</title>
     <link rel="stylesheet" href="../assets/style/globalStyle.css" />
     <link rel="stylesheet" href="../assets/style/sideBar.css" />
+    <script src="../assets/js/jQuery.js"></script>
+
+    <script>
+        $(document).on("click", "#logoutBtn", function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: "Logout?",
+                text: "Are you sure you want to log out?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, logout"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.get("logout.php", function() {
+                        window.location.href = "login.php";
+                    });
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -46,10 +65,10 @@ if (!isset($_SESSION['account_id'])) {
             <i class='bx bx-sun' id="darkLight"></i>
             <!-- <i class='bx bx-bell'></i> -->
             <!-- <i class='bx bx-user-circle'></i> -->
-             <label id="profile-name">
+            <label id="profile-name">
                 <?php echo $_SESSION['username']; ?>
             </label>
-            <a href="logout.php"><i class='bx bx-log-out'></i></a>
+            <a id="logoutBtn"><i class='bx bx-log-out'></i></a>
             <!-- <img src="../assets/images/lerong.jpg" alt="" class="profile" /> -->
         </div>
     </nav>
@@ -114,10 +133,7 @@ if (!isset($_SESSION['account_id'])) {
     </nav>
     <!-- JavaScript -->
     <!-- Bootstrap JS bundle (includes Popper) -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="../assets/js/bs.js"></script>
     <script src="../assets/js/sideBar.js"></script>
     <script src="../assets/js/jQuery.js"></script>
     <script>

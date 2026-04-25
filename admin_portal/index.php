@@ -19,8 +19,10 @@ if (!isset($_SESSION['account_id'])) {
 
     <link rel="stylesheet" href="../assets/style/globalStyle.css">
     <link rel="stylesheet" href="../assets/style/index.css">
+    <script src="../assets/js/jQuery.js"></script>
+    <script src="../assets/js/swal.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/chart.js"></script>
 </head>
 
 <body>
@@ -90,7 +92,7 @@ if (!isset($_SESSION['account_id'])) {
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="../assets/js/jQuery.js"></script> -->
 
     <script>
         $(document).ready(function() {

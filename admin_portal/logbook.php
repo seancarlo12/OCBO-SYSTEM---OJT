@@ -77,7 +77,7 @@ if (!isset($_SESSION['account_id'])) {
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../assets/js/swal.js"></script>
   <script src="../assets/js/dataTables.js"></script>
   <script src="../assets/js/fetchApps.js"></script>
   <script src="../assets/js/rowSelect.js"></script>
