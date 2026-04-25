@@ -54,6 +54,21 @@ if (!isset($_SESSION['account_id'])) {
             <th>Status</th>
             <th>Last Updated</th>
           </tr>
+
+          <!-- FILTER ROW -->
+          <tr id="filter-row">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
         </thead>
 
         <tbody>
@@ -80,10 +95,10 @@ if (!isset($_SESSION['account_id'])) {
         searching: true,
         info: true,
         ordering: true,
-        pageLength: 16,
-        scrollY: "63vh", // fixed height
+        pageLength: 15,
+        // scrollY: "58vh", 
         scrollCollapse: false,
-        stateSave: true,
+        // stateSave: true,
         // autoWidth: false,
 
         columnDefs: [{
@@ -348,9 +363,6 @@ if (!isset($_SESSION['account_id'])) {
                 <input type="checkbox" class="btn-check planType" id="pt7" value="Geodetic">
                 <label class="btn rounded-pill" for="pt7">Geodetic</label>
 
-                <input type="checkbox" class="btn-check planType" id="pt8" value="Zoning">
-                <label class="btn rounded-pill" for="pt8">Zoning</label>
-
               </div>
             </div>
           </form>
@@ -400,7 +412,6 @@ if (!isset($_SESSION['account_id'])) {
                     <option value="" hidden>Select Type</option>
                     <option value="Building Permit">Building Permit</option>
                     <option value="Occupancy Permit">Occupancy Permit</option>
-                    <option value="Zoning Clearance">Zoning Clearance</option>
                     <option value="OTHER">Other...</option>
                   </select>
 
@@ -479,9 +490,6 @@ if (!isset($_SESSION['account_id'])) {
 
                   <input type="checkbox" class="btn-check addPlanType" id="add_pt7" value="Geodetic">
                   <label class="btn rounded-pill" for="add_pt7">Geodetic</label>
-
-                  <input type="checkbox" class="btn-check addPlanType" id="add_pt8" value="Zoning">
-                  <label class="btn rounded-pill" for="add_pt8">Zoning</label>
 
                 </div>
               </div>

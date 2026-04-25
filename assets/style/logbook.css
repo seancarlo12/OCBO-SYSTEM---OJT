@@ -16,6 +16,7 @@
     background: var(--white-color);
 
     transition: 200ms;
+    min-height: 900px;
 }
 
 #control-table {

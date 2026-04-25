@@ -55,27 +55,128 @@ function getDataHash(data) {
   return JSON.stringify(data);
 }
 
+function buildFilters() {
+  let api = table;
+
+  // ✅ COLUMN FILTER CONFIG
+  let columnFilters = {
+    0: "text",
+    1: "text",
+    2: "text",
+    3: "dropdown",
+    4: "text",
+    5: "text",
+    6: "dropdown",
+    7: "text",
+    8: "text",      // Date Received (no filter)
+    9: "dropdown",
+    10: "text"
+  };
+
+  $('#filter-row th').each(function (colIndex) {
+    let column = api.column(colIndex);
+    $(this).empty();
+
+    let type = columnFilters[colIndex] || "none";
+
+    // ❌ SKIP COMPLETELY
+    if (type === "none") return;
+
+    // 🔽 DROPDOWN FILTER
+// 🔽 DROPDOWN FILTER
+if (type === "dropdown") {
+  let select = document.createElement('select');
+  select.classList.add('form-control', 'form-control-sm');
+  select.add(new Option('All', ''));
+
+  $(this).append(select);
+
+  $(select).on('click', function (e) {
+    e.stopPropagation();
+  });
+
+  let uniqueValues = new Set();
+
+  column.data().each(function (d) {
+    if (!d) return;
+
+    let text = $('<div>').html(d).text();
+
+    text.split(',').forEach(function (item) {
+      let clean = item.trim();
+      if (clean) uniqueValues.add(clean);
+    });
+  });
+
+  // ✅ FORCE FIXED OPTIONS FOR COLUMN 9
+  if (colIndex == 9) {
+    ["Removed", "Released"].forEach(val => {
+      uniqueValues.add(val);
+    });
+  }
+
+  [...uniqueValues].sort().forEach(function (val) {
+    select.add(new Option(val));
+  });
+
+  select.addEventListener('change', function () {
+    let val = select.value;
+
+    if (!val) {
+      column.search('').draw();
+    } else {
+      column.search('\\b' + val + '\\b', true, false).draw();
+    }
+  });
+}
+
+    // 🔍 TEXT FILTER
+    else if (type === "text") {
+      let input = document.createElement('input');
+      input.type = "text";
+      input.placeholder = "Search...";
+      input.classList.add('form-control', 'form-control-sm');
+
+      $(this).append(input);
+
+      $(input).on('click', function (e) {
+        e.stopPropagation();
+      });
+
+      input.addEventListener('keyup', function () {
+        column.search(this.value).draw();
+      });
+    }
+  });
+
+  // prevent sorting from filter row
+  $('#filter-row th').on('click', function (e) {
+    e.stopPropagation();
+  });
+}
+
+
 function loadTable() {
-  let currentSelected = window.selectedRowId; // save id
+  let currentSelected = window.selectedRowId;
 
   $.get("../config/getApps.php", function (data) {
     let result = JSON.parse(data);
 
     let showRemoved = $("#toggleRemoved").is(":checked");
 
-    // include toggle state
     let newHash = JSON.stringify(result) + showRemoved;
-
     if (newHash === lastDataHash) return;
 
     lastDataHash = newHash;
 
     $('[data-bs-toggle="tooltip"]').tooltip("dispose");
 
+    // ✅ IMPORTANT: clear ONCE
     table.clear();
 
+    let rows = [];
+
     result.forEach(function (row) {
-      // ❌ skip removed if toggle is OFF
       if (
         !showRemoved &&
         (row.status === "Removed" || row.status === "Released")
@@ -83,7 +184,7 @@ function loadTable() {
         return;
       }
 
-      table.row.add([
+      rows.push([
         row.application_no,
         row.name,
         row.contact_no,
@@ -93,36 +194,40 @@ function loadTable() {
         row.plan_type,
         row.comments,
 
-        // DATE RECEIVED
         `<span data-full="${formatDateTime(row.date_received)}">
           ${formatDate(row.date_received)}
         </span>`,
 
         row.status,
 
-        // LAST UPDATED
         `<span data-full="${formatDateTime(row.last_updated)}">
           ${formatDate(row.last_updated)}
-        </span>`,
+        </span>`
       ]);
     });
 
-    table.draw(false);
+    // ✅ IMPORTANT: add ALL rows at once
+    table.rows.add(rows).draw(false);
 
-        // apply URL search ONCE after table render
+    // URL search
     if (window.urlSearchAppNo) {
       table.search(window.urlSearchAppNo).draw(false);
-
-      // 🔥 clear immediately so it won't re-trigger
       window.urlSearchAppNo = null;
     }
 
-    //  RESTORE selection AFTER redraw
+    // restore selection
     window.selectedRowId = currentSelected;
+
+    // build filters once
+    if (!window.filtersBuilt) {
+      buildFilters();
+      window.filtersBuilt = true;
+    }
 
     applySelectedHighlight();
     applyRowStyles();
   });
+
   console.log("fetchapp");
 }
 
