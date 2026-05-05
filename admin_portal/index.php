@@ -41,7 +41,7 @@ if (!isset($_SESSION['account_id'])) {
                 <canvas id="typeChart"></canvas>
             </div>
 
-            <span id="ptp">Plant Type Pie Chart</span>
+            <span id="ptp">Plan Type Pie Chart</span>
             <div class="circle">
                 <canvas id="planChart"></canvas>
             </div>

@@ -103,7 +103,7 @@ if (!isset($_SESSION['account_id'])) {
 
         columnDefs: [{
             targets: 0,
-            width: "5%"
+            width: "8%"
           },
           {
             targets: 1,
@@ -134,7 +134,7 @@ if (!isset($_SESSION['account_id'])) {
 
         layout: {
           topStart: 'search',
-          topEnd: '',
+          topEnd: 'pageLength',
           bottomStart: 'info',
           bottomEnd: 'paging'
         },

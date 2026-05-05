@@ -23,7 +23,10 @@ function applySelectedHighlight() {
 }
 
 function formatDateTime(datetimeStr) {
+  if (!datetimeStr) return "N/A";
+
   let date = new Date(datetimeStr);
+  if (isNaN(date.getTime())) return "N/A";
 
   let options = {
     year: "numeric",
@@ -32,14 +35,17 @@ function formatDateTime(datetimeStr) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-    timeZone: "Asia/Manila", // 🇵🇭 Philippine Time
+    timeZone: "Asia/Manila",
   };
 
   return date.toLocaleString("en-US", options);
 }
 
 function formatDate(dateStr) {
+  if (!dateStr) return "N/A";
+
   let date = new Date(dateStr);
+  if (isNaN(date.getTime())) return "N/A";
 
   return date.toLocaleDateString("en-US", {
     year: "numeric",

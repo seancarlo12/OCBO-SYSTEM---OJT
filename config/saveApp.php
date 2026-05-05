@@ -14,21 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
 
-        // 🔥 GET CURRENT MONTH & YEAR
+        //  GET CURRENT YEAR & MONTH
         $month = date("m");
         $year  = date("y");
 
-        // 🔥 FIND LAST NUMBER FOR THIS MONTH-YEAR
+        //  GET LAST APPLICATION NUMBER (GLOBAL CONTINUOUS)
         $stmt = $conn->prepare("
             SELECT application_no 
             FROM applications 
-            WHERE application_no LIKE ?
             ORDER BY application_id DESC 
             LIMIT 1
         ");
 
-        $prefix = $month . '-' . $year . '-%';
-        $stmt->bind_param("s", $prefix);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -37,17 +34,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($row = $result->fetch_assoc()) {
             $lastAppNo = $row['application_no'];
 
-            // extract last 4 digits
-            $lastNumber = (int) substr($lastAppNo, -4);
+            // extract last 5 digits (00001 format)
+            $lastNumber = (int) substr($lastAppNo, -5);
         }
 
-        // 🔥 increment
-        $newNumber = str_pad($lastNumber + 1, 4, "0", STR_PAD_LEFT);
+        //  increment globally
+        $newNumber = str_pad($lastNumber + 1, 5, "0", STR_PAD_LEFT);
 
-        // 🔥 final formatted application_no
-        $applicationNo = $month . '-' . $year . '-' . $newNumber;
+        //  final format: YY-MM-00001
+        $applicationNo = $year . '-' . $month . '-' . $newNumber;
 
-        // 🔥 INSERT
+        //  INSERT
         $stmt = $conn->prepare("
             INSERT INTO applications 
             (application_no, name, contact_no, project_title, application_type, location, plan_type, comments, status)
@@ -73,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "status" => "success",
                 "appNo" => $applicationNo
             ]);
-
         } else {
             echo json_encode([
                 "status" => "error",
@@ -83,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->close();
         $conn->close();
-
     } catch (Exception $e) {
         echo json_encode([
             "status" => "error",
@@ -91,4 +86,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
     }
 }
-?>
