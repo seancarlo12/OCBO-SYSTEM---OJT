@@ -1,9 +1,8 @@
 <h1 align="center">
-📒 Cabanatuan City LGU Logbook System - Office of the City Building Official
+📒 Cabanatuan City LGU - Office of the City Building Official Logbook System 
 </h1>
 
 <p align="center">
-A Web-Based Digital Logbook System for Cabanatauan City LGU - Office of the City Building Official
 </p>
 
 <p align="center">
@@ -21,7 +20,7 @@ A Web-Based Digital Logbook System for Cabanatauan City LGU - Office of the City
 
 ## 📌 Overview
 
-The **LGU Logbook System** is a web-based application designed to digitize the manual logbook process used by the Office of the City Building Official.
+The **OCBO Logbook System** is a web-based application designed to digitize the manual logbook process used by the Office of the City Building Official.
 
 It replaces handwritten logs with a centralized system for recording, tracking, and managing office transactions efficiently and securely.
 
@@ -34,7 +33,6 @@ The traditional logbook system had several issues:
 - Time-consuming manual encoding of entries  
 - Difficulty searching past records  
 - Risk of lost or damaged logbooks  
-- Limited reporting and monitoring  
 - Lack of centralized data storage  
 
 ---
@@ -46,7 +44,6 @@ A digital logbook system that allows:
 - Fast encoding of office transactions  
 - Searchable and organized records  
 - Secure centralized database  
-- Easy report generation  
 - Improved tracking of daily activities  
 
 ---
@@ -59,7 +56,9 @@ A digital logbook system that allows:
 - Timestamped records
 - Organized entry categories
 
-[Logbook Entry Screenshot]
+<p align="center">
+  <img src="assets/images/log-entry.png" width="90%">
+</p>
 
 ---
 
@@ -69,7 +68,9 @@ A digital logbook system that allows:
 - Filter records efficiently  
 - Quick access to past logs  
 
-[Search Feature Screenshot]
+<p align="center">
+  <img src="assets/images/filter.png" width="90%">
+</p>
 
 ---
 
@@ -80,17 +81,9 @@ A digital logbook system that allows:
 - Printable records  
 - Export-ready data  
 
-[Reports Screenshot]
-
----
-
-## 👤 User Management
-
-- Role-based access control  
-- Admin and staff accounts  
-- Secure login system  
-
-[User Management Screenshot]
+<p align="center">
+  <img src="assets/images/report.png" width="90%">
+</p>
 
 ---
 
@@ -125,25 +118,6 @@ A digital logbook system that allows:
 ---
 
 
-# 📸 Screenshots
-
-## Login Page
-![Login](images/login.png)
-
-## Dashboard
-![Dashboard](images/dashboard.png)
-
-## Logbook Entry Form
-![Entry Form](images/entry.png)
-
-## Records List
-![Records](images/records.png)
-
-## Reports Module
-![Reports](images/reports.png)
-
----
-
 # 📈 Project Impact
 
 The system improved office operations by:
@@ -153,12 +127,6 @@ The system improved office operations by:
 - Preventing data loss  
 - Enhancing reporting efficiency  
 - Centralizing transaction history  
-
-
----
-
-# 🔗 Repository Link
-[GitHub Repository Link]
 
 ---
 
