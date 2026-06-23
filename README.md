@@ -1,13 +1,13 @@
 <h1 align="center">
-📒 LGU Logbook System (Office of the City Building Official)
+📒 Cabanatuan City LGU Logbook System - Office of the City Building Official
 </h1>
 
 <p align="center">
-A Web-Based Digital Logbook and Records Management System for LGU Office Transactions and Monitoring
+A Web-Based Digital Logbook System for Cabanatauan City LGU - Office of the City Building Official
 </p>
 
 <p align="center">
-  <img src="assets/images/cab-logo.jpg" width="100%">
+  <img src="assets/images/cab-logo.jpg" width="50%">
 </p>
 
 <p align="center">
