@@ -465,7 +465,7 @@ $(document).on("click", "#saveAppBtn", function (e) {
     return Toast.fire({ icon: "error", title: "Enter custom application type" });
   }
 
-  // ✅ SEND TO PHP FIRST
+  // SEND TO PHP FIRST
   $.ajax({
     url: "../config/saveApp.php",
     type: "POST",
