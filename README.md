@@ -7,7 +7,7 @@ A Web-Based Digital Logbook and Records Management System for LGU Office Transac
 </p>
 
 <p align="center">
-  <img src="OCBO SYSTEM\assets\images\cab-logo.jpg" width="100%">
+  <img src="assets/images/cab-logo.jpg" width="100%">
 </p>
 
 <p align="center">
