@@ -77,9 +77,7 @@ A digital logbook system that allows:
 ## 📊 Reports Module
 
 - Daily log reports  
-- Monthly summaries  
-- Printable records  
-- Export-ready data  
+- Monthly summaries   
 
 <p align="center">
   <img src="assets/images/report.png" width="90%">
