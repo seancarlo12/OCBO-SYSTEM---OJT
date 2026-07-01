@@ -57,7 +57,7 @@ A digital logbook system that allows:
 - Organized entry categories
 
 <p align="center">
-  <img src="assets/images/log-entr.png" width="90%">
+  <img src="assets/images/log-entry.png" width="90%">
 </p>
 
 ---
@@ -69,7 +69,7 @@ A digital logbook system that allows:
 - Quick access to past logs  
 
 <p align="center">
-  <img src="assets/images/filte.png" width="90%">
+  <img src="assets/images/filter.png" width="90%">
 </p>
 
 ---
@@ -80,7 +80,7 @@ A digital logbook system that allows:
 - Monthly summaries   
 
 <p align="center">
-  <img src="assets/images/repor.png" width="90%">
+  <img src="assets/images/report.png" width="90%">
 </p>
 
 ---
